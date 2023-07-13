@@ -12,14 +12,14 @@
         >
           Note: You must be 18 or above years old.
         </div>
-        <json-forms
+        <JsonForms
           :data="formData"
           :schema="formSchema"
           :uischema="formUISchema"
           :renderers="renderers"
           :ajv="ajv"
           @change="({ data }) => onChange(data)"
-        ></json-forms>
+        ></JsonForms>
       </div>
       <button
         class="btn"
@@ -37,9 +37,9 @@
   import { JsonForms } from '@jsonforms/vue';
   import { vanillaRenderers } from '@jsonforms/vue-vanilla';
   import { JsonForm } from '../data/models/JsonForm/JsonForm.model';
-  import { JsonSchema } from '@jsonforms/core';
-  import { KendoVueInputRenderer } from './forms/KendoVueInput.vue';
-  import { KendoVueDatePickerRenderer } from './forms/KendoVueDatePicker.vue';
+  import { JsonSchema, isDateControl, isStringControl, rankWith } from '@jsonforms/core';
+  import KendoVueInputComponent from './forms/KendoVueInput.vue';
+  import KendoVueDatePickerComponent from './forms/KendoVueDatePicker.vue';
   import { getAge } from '../helpers/CustomFunctions';
   import { emailRegex } from '../helpers/CustomRegex';
   import Ajv from 'ajv';
@@ -57,8 +57,20 @@
   
   const renderers = ref(Object.freeze([ // vanilla and custom renderers
     ...vanillaRenderers,
-    KendoVueInputRenderer,
-    KendoVueDatePickerRenderer
+    { // set registry for renderer to export
+      renderer: KendoVueInputComponent,
+      tester: rankWith(
+        3, //increase rank as needed(default is 2)
+        isStringControl
+      ),
+    },
+    { // set registry for renderer to export
+      renderer: KendoVueDatePickerComponent,
+      tester: rankWith(
+        4,
+        isDateControl
+      ),
+    }
   ]));
 
   const formData = ref<JsonForm>({

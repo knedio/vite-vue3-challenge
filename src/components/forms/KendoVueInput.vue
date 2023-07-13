@@ -37,10 +37,10 @@
   import { defineComponent } from 'vue';  
   import { Input } from '@progress/kendo-vue-inputs';
   import { rendererProps, useJsonFormsControl } from '@jsonforms/vue';
-  import { ControlElement, JsonFormsRendererRegistryEntry, isStringControl, rankWith } from '@jsonforms/core';
+  import { ControlElement } from '@jsonforms/core';
 
   const KendoVueInputComponent = defineComponent({
-    name: 'KendoVueInput',
+    name: 'KendoVueInputComponent',
     props: {
       ...rendererProps<ControlElement>()
     },
@@ -68,14 +68,6 @@
   });
 
   export default KendoVueInputComponent;
-
-  export const KendoVueInputRenderer: JsonFormsRendererRegistryEntry = { // set registry for renderer to export
-    renderer: KendoVueInputComponent,
-    tester: rankWith(
-      3, //increase rank as needed(default is 2)
-      isStringControl
-    ),
-  };
 </script>
 
 <style scoped lang="scss">

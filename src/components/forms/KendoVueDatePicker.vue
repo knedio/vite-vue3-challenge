@@ -37,10 +37,10 @@
   import { defineComponent } from 'vue';  
   import { DatePicker } from "@progress/kendo-vue-dateinputs";
   import { rendererProps, useJsonFormsControl } from '@jsonforms/vue';
-  import { ControlElement, JsonFormsRendererRegistryEntry, isDateControl, rankWith } from '@jsonforms/core';
+  import { ControlElement } from '@jsonforms/core';
 
   const KendoVueDatePickerComponent = defineComponent({
-    name: 'KendoVueDatePicker',
+    name: 'KendoVueDatePickerComponent',
     props: {
       ...rendererProps<ControlElement>(), // set the renderes props
     },
@@ -66,14 +66,6 @@
   });
 
   export default KendoVueDatePickerComponent;
-
-  export const KendoVueDatePickerRenderer: JsonFormsRendererRegistryEntry = { // set registry for renderer to export
-    renderer: KendoVueDatePickerComponent,
-    tester: rankWith(
-      4,
-      isDateControl
-    ),
-  };
 </script>
 
 <style scoped lang="scss">

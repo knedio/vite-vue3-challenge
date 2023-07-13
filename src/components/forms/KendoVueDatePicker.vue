@@ -76,7 +76,7 @@
   };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   .kv {
     margin-bottom: 10px;
     .kv-label {

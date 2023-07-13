@@ -23,5 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
+package-lock.json
+
 #kendo file this is for local use only
 kendo-ui-license.txt
